@@ -11,7 +11,7 @@ CAN Client library for Python.
 
 You can install this library using `pip`. To install:
 
-    pip install git+https://github.com/Enchan1207/CANClient
+    pip install git+https://github.com/Enchan1207/CANClientLib
 
 ### Import to your application
 
