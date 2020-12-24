@@ -10,20 +10,20 @@ try:
     import RPi.GPIO as GPIO
     isPiImplemented = True
 except ImportError:
-    print("Couldn't import RPi.GPIO.")
+    print("Couldn't import RPi.GPIO. Some features about Raspberry Pi will be limited.")
 
 class Client():
     # Initializer 何も設定しないと仮想CANが立ち上がる
     def __init__(self, channel="test", bustype="virtual", bitrate=500000, intpin=None, filter=None) -> None:
         # GPIO初期設定
-        if (isPiImplemented):
+        if isPiImplemented:
             if(intpin is not None):
                 GPIO.setmode(GPIO.BCM)
                 GPIO.setup(intpin, GPIO.IN)
             else:
                 print("\033[31mERROR:\033[0m None has passed to argument intpin. Please pass valid pin value.")
         else:
-            print("\033[33mWARNING:\033[0m RPi.GPIO not found.")
+            print("\033[33mWARNING:\033[0m You passed argument intPin, but RPi.GPIO not found.")
 
         # インタフェース初期化
         self.canBus = can.interface.Bus(channel, bustype=bustype, bitrate = bitrate, canfilters = filter)
