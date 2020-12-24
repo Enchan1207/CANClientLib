@@ -2,7 +2,7 @@
 # CANクライアントライブラリ
 #
 import can
-from canBusListener import Listener
+from .canBusListener import Listener
 
 # RPi.GPIOが存在するか確認する
 isPiImplemented = False
