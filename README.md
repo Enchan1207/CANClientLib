@@ -15,7 +15,7 @@ You can install this library using `pip`. To install:
 
 ### Import to your application
 
-To import it into your python script, insert `import CANClientLib.canClient`.  
+To import it into your python script, insert `import CANClientLib.canClient as canClient`.  
 And `client = canClient.Client()` to create instance.  
 If no arguments was passed to `canClient.Client`, Client configure virtual CAN and provide it.
 
