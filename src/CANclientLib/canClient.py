@@ -25,15 +25,19 @@ class Client():
 
         # インタフェース初期化
         self.canBus = can.interface.Bus(channel, bustype=bustype, bitrate = bitrate, canfilters = filter)
+        self.notifier = can.Notifier(self.canBus, [])
 
-    # 受信コールバックを登録する
-    def attachCallback(self, callback):
-        self.listener = Listener(callback)
-        self.notifier = can.Notifier(self.canBus, [self.listener,])
+    # コールバック関数追加
+    def attachCallback(self, callback) -> Listener:
+        # リスナを作ってNotifierに登録
+        listener = Listener(callback)
+        self.notifier.add_listener(listener)
+
+        return listener # これがないとdetachできなくなる
     
-    # 受信コールバックの登録を解除する
-    def detachCallback(self):
-        self.notifier.remove_listener(self.listener)
+    # リスナを指定してコールバックを開放
+    def detachCallback(self, listener):
+        self.notifier.remove_listener(listener)
 
     # CANフレームを送信する
     def sendFrame(self, id, data = None):
